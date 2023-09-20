@@ -1,0 +1,26 @@
+import React from 'react'
+
+function Timer() {
+  const time = useTimer()
+  return <div>
+    {time}
+  </div>
+}
+
+function useTimer(){
+  const [cnt, setCnt] = React.useState(0) // 计数器
+  const [start] = React.useState(Date.now()) // 初始时间
+  const curTime = React.useMemo(() => {
+    return start + 1000 * cnt
+  }, [start, cnt]) // 当前时间
+  const timerRef = useRef()
+  React.useEffect(() => {
+    timerRef.current = setInterval(() => setCnt(old => old + 1), 1000)
+    // 每隔 1 s 自增
+    return () => {
+      clearInterval(timerRef.current)
+      // 清除
+    }
+  }, [])
+  return curTime
+}
