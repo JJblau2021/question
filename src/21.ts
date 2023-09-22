@@ -11,10 +11,10 @@ function getResult(n: number): number {
   let str = ans.toString();
   let l = str.length;
 
-  let bucket = [1];
+  let bucket: number[] = [];
 
   function checkStr(bucket: number[], target: number): boolean {
-    let i = bucket[bucket.length - 1];
+    let i = bucket[bucket.length - 1] || 0;
     if (i === l) {
       let res = getBucketResult(bucket);
       return res === target;
@@ -43,3 +43,5 @@ function getResult(n: number): number {
   }
   return 0;
 }
+
+punishmentNumber(11);
